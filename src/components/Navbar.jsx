@@ -1,4 +1,21 @@
+import { useSelector } from "react-redux";
+
+
+
+
+
 const Navbar = ()=>{
+   const userInfo = useSelector((store)=>(store.user));
+   let userPhoto = "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg";
+   if(userInfo){
+    
+    if(userInfo.data.photoURL !== undefined){
+      userPhoto = userInfo.data.photoURL;
+    }
+   }
+   
+   
+
   return(
     <div className="navbar bg-base-300">
   <div className="flex-1">
@@ -7,13 +24,14 @@ const Navbar = ()=>{
   <div className="flex-none gap-2">
     
     <div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+    { userInfo &&<div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar flex w-56 justify-around px-2">
+        <span>Welcome, {userInfo.data.fname}</span>
         <div className="w-10 rounded-full">
           <img
             alt="Tailwind CSS Navbar component"
-            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+            src={userPhoto} />
         </div>
-      </div>
+      </div>}
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
