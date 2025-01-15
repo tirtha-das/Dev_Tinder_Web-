@@ -8,8 +8,8 @@ import {addUser} from "../utlis/userSlice"
 
 
 const Login =()=>{
-  const [emailId,setEmailId] = useState("");
-  const [password,setPassword] = useState("");
+  const [emailId,setEmailId] = useState("tirtha123@gmail.com");
+  const [password,setPassword] = useState("Tirtha@123");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
