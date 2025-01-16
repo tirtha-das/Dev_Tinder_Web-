@@ -1,8 +1,9 @@
 const Usercard = ({userData})=>{
-  console.log(userData);
+ // console.log(userData);
   
   const {fname,lname,photoURL,age,gender,about} = userData;
-  console.log(fname);
+  const hideButton = (userData?.hideButton || 0)
+ // console.log(fname);
   
 
     return (
@@ -16,10 +17,10 @@ const Usercard = ({userData})=>{
              <h2 className="card-title">{fname} {lname}</h2>
              {age && gender && <p className="capitalize">{age} , {gender}</p>}
              <p>{about}</p>
-             <div className="card-actions justify-center">
+             {!hideButton && <div className="card-actions justify-center">
              <button className="btn btn-primary text-lg">Ignore</button>
                <button className="btn btn-secondary text-lg">Invite</button>
-             </div>
+             </div>}
            </div>
          </div>        
     )

@@ -16,7 +16,7 @@ const Feed =()=>{
     const getFeedUsers = async()=>{
         try{
           const feedData = await axios.get(BASE_LINK+"/user/feed",{withCredentials:true});
-          console.log(feedData.data.data);
+          //console.log(feedData.data.data);
           dispatch(addFeed(feedData.data.data));
           
         }catch(err){
