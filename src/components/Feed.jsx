@@ -29,8 +29,18 @@ const Feed =()=>{
     useEffect(()=>{
         getFeedUsers();
     },[])
+
+    if(!allUserdata){
+        return (<div className="text-center my-10">
+            <h1 className="font-bold text-3xl">Feed is loading</h1>
+            </div>)
+    }
     
-    return (!allUserdata)?(<div>feed is loading</div>): ( 
+    return (allUserdata.length===0)?
+    (<div className="text-center my-10">
+        <h1 className="font-bold text-3xl">Feed is Empty</h1>
+        </div>)
+    :( 
         <div className="flex justify-center my-10">
            <Usercard userData={allUserdata[0]}/>
         </div>

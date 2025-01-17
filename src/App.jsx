@@ -6,6 +6,8 @@ import Feed from "./components/Feed"
 import { BrowserRouter ,Routes,Route} from "react-router-dom"
 import appStore from "./utlis/appStore"
 import { Provider } from "react-redux"
+import Friends from "./components/Friends"
+import PendingRequest from "./components/PendingRequest"
 
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
            <Route path="/login" element={<Login/>}/>
            <Route path="/profile" element={<Profile/>}/>
            <Route path="/error" element={<Error/>}></Route>
+           <Route path="/connections" element={<Friends/>}/>
+         <Route path="/review/request" element={<PendingRequest/>}/> 
 
         </Route>
       </Routes>
