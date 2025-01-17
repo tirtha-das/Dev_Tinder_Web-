@@ -8,8 +8,13 @@ import {addUser} from "../utlis/userSlice"
 
 
 const Login =()=>{
-  const [emailId,setEmailId] = useState("tirtha123@gmail.com");
-  const [password,setPassword] = useState("Tirtha@123");
+  const [emailId,setEmailId] = useState("");
+  const [password,setPassword] = useState("");
+  const [firstName,setFirstName] = useState("");
+  const [lastName,setLastName] = useState("");
+  const [isLoginForm,setIsLoginForm] = useState(true);
+  const [showError,setShowError] = useState(false);
+  const [error,setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,24 +25,63 @@ const Login =()=>{
             password:password
           },{withCredentials:true});
 
-         // console.log(userData);
-          
-
-          dispatch(addUser(userData.data));
+         dispatch(addUser(userData.data));
+         setError("");
+         setShowError(false);
           navigate("/");
-
-
-       }catch(err){
-         console.log("ERROR :"+err.message);
-         
+      }catch(err){
+        //console.log(err);
+        
+         setError("ERROR : "+err.response.data);
+         setShowError(true);
        }
+   }
+
+   const handleSignUp = async()=>{
+     try{
+      const user = await axios.post(BASE_LINK+"/signup",
+        {
+          fname:firstName,
+          lname:lastName,
+          email:emailId,
+          password:password
+        },
+        {withCredentials:true})
+
+        dispatch(addUser(user.data));
+        setError("");
+         setShowError(false);
+        navigate("/profile");
+
+     }catch(err){
+      //console.log(err);
+      
+      setError("ERROR : "+err.response.data);
+      setShowError(true);
+     }
    }
 
     return(
         <div className="h-[80vh] flex justify-center items-center">
            <div className="card bg-base-300 w-96 shadow-xl">
             <div className="card-body">
-              <h2 className="card-title">Login</h2>
+              <h2 className="card-title">{isLoginForm?"Login":"Sign Up"}</h2>
+              {!isLoginForm && <><label className="form-control w-full max-w-xs my-2">
+               <div className="label">
+                 <span className="label-text">First Name</span>
+               </div>
+               <input type="text" className="input input-bordered w-full max-w-xs"  value={firstName} onChange={(event)=>{
+                setFirstName(event.target.value)
+               }}/>
+             </label>
+             <label className="form-control w-full max-w-xs my-2">
+               <div className="label">
+                 <span className="label-text">Last Name</span>
+               </div>
+               <input type="text" className="input input-bordered w-full max-w-xs"  value={lastName} onChange={(event)=>{
+                setLastName(event.target.value)
+               }}/>
+             </label></>}
               <label className="form-control w-full max-w-xs my-2">
                <div className="label">
                  <span className="label-text">Email Id</span>
@@ -54,10 +98,22 @@ const Login =()=>{
                 setPassword(event.target.value)
                }}/>
              </label>
-              <div className="card-actions justify-end">
-      <          button className="btn btn-primary" onClick={handleUserLogin}>Submit</button>
+             {showError && <p className="text-red-600 text-left text-lg">{error}</p>}
+              <div className="card-actions justify-center">
+                 <button className="btn btn-primary" onClick={()=>{
+                    return (isLoginForm)?handleUserLogin():handleSignUp();
+                 }}>{isLoginForm?"Login":"Sign Up"}</button>
               </div>
+              <p className="text-center cursor-pointer"
+               onClick={()=>{
+                setIsLoginForm(!isLoginForm);
+                setShowError(false);
+                setError("");
+               }}>
+              {isLoginForm?"New user? Click here to sign up":"Existing user? click here to login"}
+            </p>
             </div>
+           
           </div>                   
         </div>
     )

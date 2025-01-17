@@ -46,6 +46,7 @@ const EditProfile = ({user})=>{
            setShowToast(1);
            setTimeout(()=>{
               setShowToast(0);
+              navigate("/");
            },2000)
     }
     catch(err){
