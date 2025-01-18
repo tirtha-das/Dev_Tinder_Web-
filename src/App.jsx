@@ -1,5 +1,5 @@
 import Body from "./components/Body"
-import Login from "./components/login"
+import Login from "./components/Login"
 import Profile from "./components/Profile"
 import Error from "./components/Error"
 import Feed from "./components/Feed"
