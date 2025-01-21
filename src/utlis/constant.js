@@ -1,2 +1,2 @@
 
-export const BASE_LINK="http://localhost:7777";
+export const BASE_LINK="/api";
