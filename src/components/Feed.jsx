@@ -27,6 +27,7 @@ const Feed =()=>{
             else{
             navigate("/error");
             }
+            
         }
     }
 

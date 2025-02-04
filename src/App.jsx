@@ -8,6 +8,7 @@ import appStore from "./utlis/appStore"
 import { Provider } from "react-redux"
 import Friends from "./components/Friends"
 import PendingRequest from "./components/PendingRequest"
+import Chat from "./components/Chat"
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
            <Route path="/error" element={<Error/>}></Route>
            <Route path="/connections" element={<Friends/>}/>
          <Route path="/review/request" element={<PendingRequest/>}/> 
+         <Route path="/chat/:targetUserId" element={<Chat/>}/>
 
         </Route>
       </Routes>

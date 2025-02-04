@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { BASE_LINK } from "../utlis/constant";
 import axios from "axios";
 import { useEffect } from "react";
@@ -44,7 +44,7 @@ const Friends = ()=>{
                     connections.map((connection)=>{
                         const {fname,lname,photoURL,about,_id} = connection;
                         return (
-                            <div key={_id} className="bg-base-300 p-4 m-2 flex items-center rounded-lg justify-between">
+                            <div key={_id} className="bg-base-300 p-4 m-2 flex items-center rounded-lg justify-between w-1/3">
                             <div className="mr-3">
                                <img src={photoURL} alt="userPhoto"
                                className="w-20 h-20 rounded-full"></img>
@@ -52,6 +52,11 @@ const Friends = ()=>{
                            <div>
                                <h1 className="font-bold text-xl">{fname+" "+lname}</h1>
                                <p>{about}</p>
+                           </div>
+                           <div>
+                          <Link to={"/chat/"+_id}> 
+                          <button className="btn btn-accent">Chat</button>
+                          </Link>
                            </div>
                         </div>
                         ) 
